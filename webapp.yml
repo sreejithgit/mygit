@@ -1,0 +1,38 @@
+resources:
+  repositories:
+  - repository: MyGitHubRepo # The name used to reference this repository in the checkout step
+    type: githubenterprise 
+    endpoint: CUC-GitHub  #Update your Github connection name here
+    name: corp-gad-cloud-cuc/GSK_CUC
+    ref: /dev/CUC_Devops
+pr:
+- dev
+- master
+
+variables:
+- template: variable.yaml  
+stages:
+
+parameters:
+- name: Enviornment
+  displayName: Deploying Enviornment
+  type: string
+  default: SandBox
+  values:
+  - SandBox
+  - DevTest
+  - UAT
+  - Prod
+
+- name: Action
+  displayName: Action To Done
+  type: string
+  default: Create
+  values:
+  - Create
+  - Update AD
+  - Add Vnet
+  - Delete
+
+
+trigger: none
